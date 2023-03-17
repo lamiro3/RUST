@@ -1,50 +1,24 @@
-#[derive(Debug)]
-
-struct Rectangle {
-    width: u32,
-    height: u32
+enum Coins {
+    Penny,
+    Nickel,
+    Dime,
+    Quater
 }
 
-// 구조체 내 함수 정의 -> impl 문 활용
-
-/*
-    연관 함수는 새로운 구조체의 인스턴스를 반환해주는 생성자
-    - 연관함수란? : param에 self가 없으면서 impl 내에 정의된 함수
- */
-
-impl Rectangle {
-    fn area(&self) -> u32 {
-        self.width*self.height
-    }
-
-    fn can_hold(&self, other: &Rectangle) -> bool {
-        self.width > other.width && self.height > other.height
-    }
-
-    fn newSq(_size: u32) -> Rectangle {
-        Rectangle {
-            width:_size, height:_size
-        }
+fn value_in_cents(coins: Coins) -> i32 {
+    match coins {
+        // [match 표현식] : 열거형과 열거형의 variant를 패턴으로 사용함.
+        Coins::Penny => {
+            println!("1 penny군요! 축하합니다 :)"); // 이렇게 되면 Coins::Penny가 참조될 때 마다 match 표현식에 의해 실행됨
+            1
+        },
+        Coins::Nickel => 5,
+        Coins::Dime => 10,
+        Coins::Quater => 25,
     }
 }
 
 fn main() {
-    let rect1 = Rectangle {
-        width: 30, height: 40
-    };
-
-    let rect2 = Rectangle {
-        width: 20, height: 20
-    };
-
-    let rect3 = Rectangle {
-        width: 30, height: 50
-    };
-
-    let sq = Rectangle::newSq(30);
-
-
-    println!("Can rect1 hold rect2? {}", rect1.can_hold(&rect2));
-    println!("Can rect1 hold rect3? {}", rect1.can_hold(&rect3));
-    println!("Sq Info: {:#?}", sq);
+    let penny = value_in_cents(Coins::Penny);
+    println!("{}", penny);
 }

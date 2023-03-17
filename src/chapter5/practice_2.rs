@@ -1,4 +1,4 @@
-#[derive(Debug)]
+#[derive(Debug)] // 이 친구를 정의해줘야 값을 보다 더 정확하게 살펴볼 수 있음.
 
 struct Rectangle {
     width: u32,
